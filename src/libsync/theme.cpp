@@ -217,6 +217,16 @@ QString Theme::defaultServerFolder() const
     return QLatin1String("/");
 }
 
+QString Theme::conflictHelpUrl() const
+{
+    auto baseUrl = helpUrl();
+    if (baseUrl.isEmpty())
+        return QString();
+    if (!baseUrl.endsWith('/'))
+        baseUrl.append('/');
+    return baseUrl + QStringLiteral("conflicts.html");
+}
+
 QString Theme::overrideServerUrl() const
 {
     return QString();
@@ -527,6 +537,5 @@ QString Theme::versionSwitchOutput() const
     stream << "Using '" << QSslSocket::sslLibraryVersionString() << "'" << endl;
     return helpText;
 }
-
 
 } // end namespace client

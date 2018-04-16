@@ -118,9 +118,27 @@ public:
     virtual bool multiAccount() const;
 
     /**
-    * URL to help file
+    * URL to documentation.
+    *
+    * This is opened in the browser when the "Help" action is selected from the tray menu.
+    *
+    * If the function is overridden to return an empty string the action is removed from
+    * the menu.
+    *
+    * Defaults to ownCloud's client documentation website.
     */
     virtual QString helpUrl() const { return QString(); }
+
+    /**
+     * The url to use for showing help on conflicts.
+     *
+     * If the function is overridden to return an empty string no help link will be shown.
+     *
+     * Defaults to helpUrl() + "conflicts.html", which is a page in ownCloud's client
+     * documentation website. If helpUrl() is empty, this function will also return the
+     * empty string.
+     */
+    virtual QString conflictHelpUrl() const;
 
     /**
      * Setting a value here will pre-define the server url.
@@ -334,7 +352,6 @@ public:
      * important dependency versions.
      */
     virtual QString versionSwitchOutput() const;
-
 
 protected:
 #ifndef TOKEN_AUTH_ONLY
